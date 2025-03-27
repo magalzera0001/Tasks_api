@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+    <img src="{{
+            user.userprofile.image.url|
+            default: 'static/img/default-profile.png'
+        }}"
+        style="height: 40px; border-radius: 50%;"
+    />
+    <a href="{% url 'tasks' %}">Minhas Tarefas</a>
+    <form id='logout-form' method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Sair</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Entrar</a>
+{% endif %}
